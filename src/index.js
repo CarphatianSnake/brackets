@@ -1,9 +1,11 @@
 module.exports = function check(str, bracketsConfig) {
   let stack = [];
 
-  const openBrackets = bracketsConfig.map(item => item[0]);
   const bracketsMap = {};
-  bracketsConfig.forEach(item => bracketsMap[item[1]] = item[0]);
+  const openBrackets = bracketsConfig.map(item => {
+    bracketsMap[item[1]] = item[0];
+    return item[0];
+  });
 
   for (let i = 0; i < str.length; i++) {
     const currSymbol = str[i];
