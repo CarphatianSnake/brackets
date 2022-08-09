@@ -12,7 +12,7 @@ module.exports = function check(str, bracketsConfig) {
     if (openBrackets.includes(currSymbol)) {
       if (bracketsMap[currSymbol] !== currSymbol || currSymbol !== stackTopEl) {
         stack.push(currSymbol);
-      } else if (currSymbol === stackTopEl) {
+      } else {
         stack.pop();
       }
     } else {
