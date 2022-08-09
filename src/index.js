@@ -6,13 +6,13 @@ module.exports = function check(str, bracketsConfig) {
   bracketsConfig.forEach(item => bracketsMap[item[1]] = item[0]);
 
   for (let i = 0; i < str.length; i++) {
-
-    if (openBrackets.includes(str[i])) {
-      if (bracketsMap[str[i]] !== str[i]) {
-        stack.push(str[i]);
-      } else if (bracketsMap[str[i]] === str[i] && str[i] !== stack[stack.length - 1]) {
-        stack.push(str[i]);
-      } else if (str[i] === stack[stack.length - 1]) {
+    const currSymbol = str[i];
+    const stackTopEl = stack[stack.length - 1];
+    
+    if (openBrackets.includes(currSymbol)) {
+      if (bracketsMap[currSymbol] !== currSymbol || currSymbol !== stackTopEl) {
+        stack.push(currSymbol);
+      } else if (currSymbol === stackTopEl) {
         stack.pop();
       }
     } else {
@@ -20,7 +20,7 @@ module.exports = function check(str, bracketsConfig) {
         return false;
       }
 
-      if (bracketsMap[str[i]] === stack[stack.length - 1]) {
+      if (bracketsMap[currSymbol] === stackTopEl) {
         stack.pop();
       } else {
         return false;
