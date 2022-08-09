@@ -1,4 +1,4 @@
-module.exports = function check(str, bracketsConfig) {
+const check = (str, bracketsConfig) => {
   let stack = [];
 
   const openBrackets = bracketsConfig.map(item => item[0]);
@@ -8,7 +8,9 @@ module.exports = function check(str, bracketsConfig) {
   for (let i = 0; i < str.length; i++) {
 
     if (openBrackets.includes(str[i])) {
-      stack.push(str[i]);
+      if (bracketsMap[str[i]] !== str[i] || bracketsMap[str[i]] === str[i] && stack[stack.length - 1] === str[i]) {
+        stack.push(str[i]);
+      }
     } else {
       if (stack.length === 0) {
         return false;
