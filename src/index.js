@@ -8,8 +8,12 @@ module.exports = function check(str, bracketsConfig) {
   for (let i = 0; i < str.length; i++) {
 
     if (openBrackets.includes(str[i])) {
-      if (bracketsMap[str[i]] !== str[i] || bracketsMap[str[i]] === str[i] && str[i] !== stack[stack.length - 1]) {
+      if (bracketsMap[str[i]] !== str[i]) {
         stack.push(str[i]);
+      } else if (bracketsMap[str[i]] === str[i] && str[i] !== stack[stack.length - 1]) {
+        stack.push(str[i]);
+      } else if (str[i] === stack[stack.length - 1]) {
+        stack.pop();
       }
     } else {
       if (stack.length === 0) {
